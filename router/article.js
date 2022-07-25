@@ -25,4 +25,6 @@ const upload = multer({ dest: path.join(__dirname, "../uploads") });
 // 
 router.post("/add", upload.single('cover_img'), artHandler.addArt);
 
+router.get('/list', artHandler.getAllArt);
+
 module.exports = router;
