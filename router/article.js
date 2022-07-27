@@ -27,4 +27,6 @@ router.post("/add", upload.single('cover_img'), artHandler.addArt);
 
 router.get('/list', artHandler.getAllArt);
 
+router.get('/delete/:id', artHandler.delArt);
+
 module.exports = router;

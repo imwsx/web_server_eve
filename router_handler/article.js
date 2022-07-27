@@ -65,3 +65,18 @@ exports.getAllArt = async (req, res) => {
     total,
   });
 };
+
+exports.delArt = async (req, res) => {
+  const updateSql = "update eve_article set is_delete = 1 where id = ?";
+  let results = [];
+  try {
+    results = await db.queryByPromisify(updateSql, req.params.id);
+    if (results.affectedRows !== 1) {
+      return res.cc("删除文章失败!");
+    }
+  } catch (err) {
+    return res.cc(err);
+  }
+
+  res.cc("删除文章成功", 0);
+};
