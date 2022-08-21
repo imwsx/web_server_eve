@@ -6,6 +6,7 @@ const userRouter = require("./router/user");
 const userinfoRouter = require("./router/userinfo");
 const artCateRouter = require("./router/artcate");
 const proCateRouter = require('./router/procate');
+const proTcRouter = require('./router/protc');
 const artRouter = require("./router/article");
 const config = require("./config");
 const PORT = 8081;
@@ -52,6 +53,8 @@ app.use("/my/article", artRouter);
 
 // 获取产品分类路由规则
 app.use("/my/pro", proCateRouter);
+
+app.use("/my/testcase", proTcRouter);
 
 // 全局错误处理函数中间件
 app.use(function (err, req, res, next) {

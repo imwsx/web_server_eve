@@ -1,8 +1,8 @@
 const db = require("../db/index");
 
-exports.getProCates = async (req, res) => {
+exports.getProTc = async (req, res) => {
   const selectSql =
-    "select a.id, a.pro_model, a.pro_name, a.pro_status, a.edittime from eve_pro_cate as a where a.is_delete=0 limit ?,?";
+    "select a.id, a.tc_title, a.tc_pre, a.tc_step, a.tc_exp from eve_tc as a where a.is_delete=0 limit ?,?";
   let results = [];
   try {
     results = await db.queryByPromisify(selectSql, [
@@ -14,7 +14,7 @@ exports.getProCates = async (req, res) => {
   }
 
   const countSql =
-    "select count(*) as num from eve_pro_cate where is_delete = 0";
+    "select count(*) as num from eve_tc where is_delete = 0";
   let total = null;
   try {
     let [{ num }] = await db.queryByPromisify(countSql);
@@ -24,13 +24,13 @@ exports.getProCates = async (req, res) => {
   }
   res.send({
     status: 0,
-    message: "获取产品分类成功!",
+    message: "获取用例成功!",
     data: results,
     total,
   });
 };
 
-exports.getProCateById = (req, res) => {
+exports.getProTcById = (req, res) => {
   const selectSql = "select * from eve_pro_cate where id=?";
   db.query(selectSql, req.params.id, (err, results) => {
     if (err) {
@@ -52,7 +52,7 @@ exports.getProCateById = (req, res) => {
   });
 };
 
-exports.addProCate = (req, res) => {
+exports.addProTc = (req, res) => {
   // 1. 查重, 是否占用
   const selectSql = "select * from eve_pro_cate where pro_model=?";
   db.query(selectSql, req.body.pro_model, (err, results) => {
@@ -80,7 +80,7 @@ exports.addProCate = (req, res) => {
   });
 };
 
-exports.deleteProCateById = (req, res) => {
+exports.deleteTcById = (req, res) => {
   const updateSql = "update eve_pro_cate set is_delete=1 where id=?";
 
   //   req.params
@@ -103,7 +103,7 @@ exports.deleteProCateById = (req, res) => {
   });
 };
 
-exports.updateProCateById = (req, res) => {
+exports.updateTcById = (req, res) => {
   // 1. 查重, 查看非本 id 是否占用分类名或分类别名
   const selectSql = "select * from eve_pro_cate where id<>? and pro_model = ?";
 
