@@ -5,6 +5,10 @@ const router = express.Router();
 
 router.get("/tcs", proTcHandler.getProTc);
 
+router.get("/tcs/status", proTcHandler.getProTcByStatus);
+
+router.get("/tcs/pr", proTcHandler.getProTcByPr);
+
 router.get("/tcs/:id", proTcHandler.getProTcById);
 
 router.post("/addtc", proTcHandler.addProTc);
